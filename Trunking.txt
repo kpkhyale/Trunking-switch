@@ -1,0 +1,59 @@
+Trunking
+
+Task
+
+1.create Vlan 10,Vlan 20 on both Switch
+2.shift port in to their respective Vlan as per the diagram
+3.Confiure f0/20 port between SW1 and SW2 as Trunk link
+4.Ensure that users of same VLAN on different Switches must communicate with each other
+
+
+SW1
+
+en
+conf t
+hostname SW1
+
+vlan 10
+vlan 20
+end
+
+int range fa0/1-2
+switchport mode access
+switchport access vlan 10
+exit
+
+int range fa0/3-4
+switchport mode access
+switchport access vlan 20
+exit
+
+int fa0/20
+switchport mode trunk
+switchport trunk encapsulation dot1q
+
+
+SW2
+
+
+en 
+conf t 
+hostname SW2
+
+vlan 10
+vlan 20
+end
+
+int range fa0/1-2
+switchport mode access
+switch access vlan 10
+exit
+
+int range fa0/3-4
+switchport mode access
+switchport access vlan 20
+exit
+
+int fa0/20
+switchport mode trunk
+switchport trunk encapsulation dot1q
